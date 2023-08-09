@@ -14,10 +14,10 @@ const check = (numArray: number[], target: number) => {
 
       if (result === true) {
         console.log(
-          `matching number: ${firstArrayValue} found at index: ${firstArrayIndex}`
+          `matching number: ${firstArrayValue} found at index: ${firstArrayIndex}`,
         );
         console.log(
-          `matching number: ${secondArrayValue} found at index: ${secondArrayIndex}`
+          `matching number: ${secondArrayValue} found at index: ${secondArrayIndex}`,
         );
         answers.push(firstArrayIndex, secondArrayIndex);
         answered = true;
@@ -34,3 +34,5 @@ function twoSum(nums: number[], target: number): number[] {
   console.log("answers are", answers);
   return answers;
 }
+
+export {};

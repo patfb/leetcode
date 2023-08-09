@@ -4,7 +4,7 @@
 // x = target - current
 const calcOtherNumberThatAddsUpToTarget = (
   currentNumber: number,
-  target: number
+  target: number,
 ) => {
   return target - currentNumber;
 };
@@ -17,11 +17,11 @@ const check = (nums: number[], target: number): number[] => {
   nums.find((currentNumberValue, currentNumberIndex) => {
     const otherNumberToFind = calcOtherNumberThatAddsUpToTarget(
       currentNumberValue,
-      target
+      target,
     );
 
     console.log(
-      `have ${currentNumberValue} at position ${currentNumberIndex}, checking the map to see if we have ${otherNumberToFind} at any other index except our current one`
+      `have ${currentNumberValue} at position ${currentNumberIndex}, checking the map to see if we have ${otherNumberToFind} at any other index except our current one`,
     );
 
     if (
@@ -33,14 +33,14 @@ const check = (nums: number[], target: number): number[] => {
       // push index of the otherNumber and the index of the current number onto our answer variable
       answer.push(
         otherNumberIndexMap.get(otherNumberToFind) as number,
-        currentNumberIndex
+        currentNumberIndex,
       );
 
       // return true to exit the array.find loop
       return true;
     }
     console.log(
-      `didn't find a match so we're adding ${currentNumberValue} to the map with index ${currentNumberIndex}`
+      `didn't find a match so we're adding ${currentNumberValue} to the map with index ${currentNumberIndex}`,
     );
     otherNumberIndexMap.set(currentNumberValue, currentNumberIndex);
 
@@ -56,3 +56,5 @@ function twoSum(nums: number[], target: number): number[] {
   console.log("answer is", answer);
   return answer;
 }
+
+export {};
