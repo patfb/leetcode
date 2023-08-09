@@ -3,7 +3,7 @@
 // Runtime: 68 ms beats 89.39% of users with Typescript
 // Memory: 47.79 mb beats 33.61% of users with Typescript
 
-// remember to remove console.log statements to dramatically improve runtime stats
+// remember to remove console.log statements to dramatically improve runtime stats and improve memory stats
 
 // need to check each row - this is easy just check that each row only has numbers 1 - 9. Make sure there are no repeats - that's it
 // check each column. We can make all the columns by taking the matching indices from each row. For example make an array of row1[0] and row2[0], etc
