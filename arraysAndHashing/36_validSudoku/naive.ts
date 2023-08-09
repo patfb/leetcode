@@ -1,5 +1,10 @@
 // https://leetcode.com/problems/valid-sudoku/
 
+// Runtime: 68 ms beats 89.39% of users with Typescript
+// Memory: 47.79 mb beats 33.61% of users with Typescript
+
+// remember to remove console.log statements to dramatically improve runtime stats
+
 // need to check each row - this is easy just check that each row only has numbers 1 - 9. Make sure there are no repeats - that's it
 // check each column. We can make all the columns by taking the matching indices from each row. For example make an array of row1[0] and row2[0], etc
 // check each box - we do this by grouping the rows into groups of 3 because you need 3 rows to make a row of boxes
