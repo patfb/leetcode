@@ -101,22 +101,22 @@ const isValidSudoku = (board: string[][]): boolean => {
   const allRowsUnique = isSudokuListValid(board);
 
   if (!allRowsUnique) {
-    console.log("all rows are not unique");
+    // console.log("all rows are not unique");
     return false; // if rows aren't unique then fail fast
   }
 
-  console.log("row length", board.length);
+  // console.log("row length", board.length);
 
   // only do this if all rows are unique
   const columns = getColumnsFromRows(board);
 
-  console.log("column count", columns.length);
-  console.log("columns are", columns);
+  // console.log("column count", columns.length);
+  // console.log("columns are", columns);
 
   const allColumnsUnique = isSudokuListValid(columns);
 
   if (!allColumnsUnique) {
-    console.log("all columns are not unique");
+    // console.log("all columns are not unique");
     return false; // if columns aren't unique then fail fast
   }
 
@@ -136,7 +136,7 @@ const isValidSudoku = (board: string[][]): boolean => {
   ]);
 
   if (!allSquaresUnique) {
-    console.log("all squares are not unique");
+    // console.log("all squares are not unique");
     return false;
   }
 
