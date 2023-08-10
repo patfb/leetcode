@@ -1,7 +1,7 @@
 // https://leetcode.com/problems/valid-sudoku/
 
-// Runtime: 68 ms beats 89.39% of users with Typescript
-// Memory: 47.79 mb beats 33.61% of users with Typescript
+// Runtime: 64 ms beats 94.79% of users with Typescript
+// Memory: 47.42 mb beats 37.52% of users with Typescript
 
 // remember to remove console.log statements to dramatically improve runtime stats and improve memory stats
 
@@ -98,32 +98,17 @@ const isSudokuListValid = (sudokuLists: string[][]): boolean => {
 };
 
 const isValidSudoku = (board: string[][]): boolean => {
-  const isBlankBoard = board.every((row) => allBlank(row));
-
-  if (isBlankBoard) return true; // if the board is totally blank then that's allowed apparently so we'll check for that first
-
   // do all rows unique first because it requires the least amount of work. Allows us to fail fast
   const allRowsUnique = isSudokuListValid(board);
 
-  if (!allRowsUnique) {
-    // console.log("all rows are not unique");
-    return false; // if rows aren't unique then fail fast
-  }
-
-  // console.log("row length", board.length);
+  if (!allRowsUnique) return false;
 
   // only do this if all rows are unique
   const columns = getColumnsFromRows(board);
 
-  // console.log("column count", columns.length);
-  // console.log("columns are", columns);
-
   const allColumnsUnique = isSudokuListValid(columns);
 
-  if (!allColumnsUnique) {
-    // console.log("all columns are not unique");
-    return false; // if columns aren't unique then fail fast
-  }
+  if (!allColumnsUnique) return false;
 
   // do the squares last because it's the hardest
 
@@ -140,10 +125,11 @@ const isValidSudoku = (board: string[][]): boolean => {
     ...lastThreeSquares,
   ]);
 
-  if (!allSquaresUnique) {
-    // console.log("all squares are not unique");
-    return false;
-  }
+  if (!allSquaresUnique) return false;
+
+  const isBlankBoard = board.every((row) => allBlank(row)); // do this one next to last because it's uncommon
+
+  if (isBlankBoard) return true; // if the board is totally blank then that's allowed apparently so we'll check for that first
 
   return allRowsUnique && allColumnsUnique && allSquaresUnique;
 };
