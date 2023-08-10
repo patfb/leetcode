@@ -43,3 +43,5 @@ class MinStack {
  * var param_3 = obj.top()
  * var param_4 = obj.getMin()
  */
+
+export {};
