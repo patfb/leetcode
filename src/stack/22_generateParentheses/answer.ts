@@ -1,6 +1,11 @@
+// https://leetcode.com/problems/generate-parentheses
+
+// Runtime: 56ms beats 87.73% of users with TypeScript
+// Memory: 44.55mb beats 77.42% of users with TypeScript
+
 // there's a typo in this function name
 const generateParenthesis = (nPairs: number): string[] => {
-  let iterations: number = 0;
+  // let iterations: number = 0;
   const stack: string[] = [];
   const combinations: string[] = []; // the array we'll keep track of our running list of valid combinations
 
@@ -8,7 +13,7 @@ const generateParenthesis = (nPairs: number): string[] => {
   // 'closed' refers to a ')'
 
   const backtrack = (nOpen: number, nClosed: number) => {
-    iterations++;
+    // iterations++;
     // console.log(
     //   `iteration: ${iterations}, nOpen: ${nOpen}, nClosed: ${nClosed}, nPairs: ${nPairs}`,
     // );
@@ -38,11 +43,11 @@ const generateParenthesis = (nPairs: number): string[] => {
 
   backtrack(0, 0); // start the recursion
 
-  console.log(
-    `total iterations: ${iterations}, valid combinations generated: ${combinations.length}`,
-  );
+  // console.log(
+  //   `total iterations: ${iterations}, valid combinations generated: ${combinations.length}`,
+  // );
 
   return combinations;
 };
 
-console.log("generate parens", generateParenthesis(3));
+// console.log("generate parens", generateParenthesis(3));
