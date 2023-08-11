@@ -40,3 +40,22 @@ const evalRPN = (tokens: string[]): number => {
 
   return parseInt(stack[0]);
 };
+
+console.log(
+  "reverse polish notation answer:",
+  evalRPN([
+    "10",
+    "6",
+    "9",
+    "3",
+    "+",
+    "-11",
+    "*",
+    "/",
+    "*",
+    "17",
+    "+",
+    "5",
+    "+",
+  ]),
+);
