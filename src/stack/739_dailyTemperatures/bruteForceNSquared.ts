@@ -20,3 +20,5 @@ const dailyTemperatures = (temps: number[]): number[] => {
 };
 
 console.log("daily temperatures", dailyTemperatures([30, 60, 90]));
+
+export {};
