@@ -27,3 +27,5 @@ const twoSum = (numbers: number[], target: number): number[] => {
 };
 
 console.log("twoSum", twoSum([2, 7, 11, 15], 26));
+
+export {};
