@@ -59,4 +59,4 @@ const checkInclusion = (s1: string, s2: string): boolean => {
 
 // console.log("checkInclusion", checkInclusion("ab", "eidbaooo"));
 
-export { checkInclusion };
+export {};
