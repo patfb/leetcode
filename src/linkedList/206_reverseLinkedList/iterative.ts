@@ -33,5 +33,3 @@ const reverseList = (head: IListNode | null): IListNode | null => {
   }
   return previous;
 };
-
-export {};
