@@ -37,4 +37,5 @@ const search = (nums: number[], target: number): number => {
   return index;
 };
 
+export {};
 // console.log("binary search", search([-1, 0, 3, 5, 9, 12], 2));
