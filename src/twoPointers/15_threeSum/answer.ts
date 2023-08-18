@@ -13,14 +13,13 @@ const threeSum = (nums: number[]): number[][] => {
 
     // regular two sums problem here
     while (leftPointer < rightPointer) {
-      // console.log("loop");
-      const leftValue = nums[leftPointer];
-      const rightValue = nums[rightPointer];
+      console.log("loop");
+
       // console.log(
       //   `start left ${leftPointer}:${leftValue}, right ${rightPointer}:${rightValue}`,
       // );
 
-      const sum = number + leftValue + rightValue;
+      const sum = number + nums[leftPointer] + nums[rightPointer];
 
       if (sum > 0) {
         // console.log(`sum ${sum} is too high so decrementing right pointer`);
@@ -28,7 +27,7 @@ const threeSum = (nums: number[]): number[][] => {
       } else if (sum < 0) {
         leftPointer++;
       } else {
-        allAnswers.push([number, leftValue, rightValue]);
+        allAnswers.push([number, nums[leftPointer], nums[rightPointer]]);
         leftPointer++;
         while (
           nums[leftPointer] === nums[leftPointer - 1] &&
@@ -43,4 +42,4 @@ const threeSum = (nums: number[]): number[][] => {
   return allAnswers;
 };
 
-// console.log(threeSum([-1, 0, 1, 2, -1, -4]));
+console.log(threeSum([-1, 0, 1, 2, -1, -4]));
