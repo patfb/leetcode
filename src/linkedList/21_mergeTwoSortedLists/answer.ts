@@ -24,6 +24,7 @@ const mergeTwoLists = (
   console.log("list1", list1);
   console.log("list2", list2);
 
+  // @ts-ignore
   const mergedList = new ListNode();
   let tail = mergedList;
 
