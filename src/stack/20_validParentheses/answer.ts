@@ -49,3 +49,5 @@ const isValid = (symbols: string): boolean => {
 
   return allGood && stack.length === 0;
 };
+
+export {};
