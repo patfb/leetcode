@@ -17,3 +17,5 @@ function containsDuplicate(nums: number[]): boolean {
 
   return typeof duplicateNumber === "number"; // duplicateNumber is the first number we've found that has a duplicate. If there isn't a duplicate then it'll be undefined.
 }
+
+export {};
