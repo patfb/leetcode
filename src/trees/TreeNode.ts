@@ -4,12 +4,12 @@ class TreeNode {
   right: TreeNode | null;
   constructor(
     val?: number | string,
-    left?: TreeNode | null,
-    right?: TreeNode | null,
+    left: TreeNode | null = null,
+    right: TreeNode | null = null,
   ) {
-    this.val = val === undefined ? 0 : val;
-    this.left = left === undefined ? null : left;
-    this.right = right === undefined ? null : right;
+    this.val = val;
+    this.left = left;
+    this.right = right;
   }
 }
 

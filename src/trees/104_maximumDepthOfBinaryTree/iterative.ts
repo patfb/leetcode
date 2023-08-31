@@ -28,12 +28,11 @@ const maxDepth = (node: TreeNode | null): number => {
   if (!node) return 0;
 
   let maxDepth = 1;
-  let depthOfNode = 1;
 
   const stack: [TreeNode, number][] = [[node, 1]];
 
   while (stack.length > 0) {
-    [node, depthOfNode] = stack.pop();
+    const [node, depthOfNode] = stack.pop();
 
     maxDepth = Math.max(maxDepth, depthOfNode);
 
