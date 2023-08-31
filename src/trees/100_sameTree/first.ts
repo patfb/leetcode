@@ -53,3 +53,5 @@ const isSameTree = (a: TreeNode | null, b: TreeNode | null): boolean => {
 };
 
 console.log("isSameTree", isSameTree(a, x));
+
+export {};
