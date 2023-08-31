@@ -5,14 +5,14 @@
 import { TreeNode } from "../TreeNode";
 
 // tree 1
-const a = new TreeNode("a");
-const b = new TreeNode("b");
-a.left = b;
+// const a = new TreeNode("a");
+// const b = new TreeNode("b");
+// a.left = b;
 
 // tree 2
-const x = new TreeNode("a");
-const y = new TreeNode("b");
-x.right = y;
+// const x = new TreeNode("a");
+// const y = new TreeNode("b");
+// x.right = y;
 
 const isSameTree = (a: TreeNode | null, b: TreeNode | null): boolean => {
   const jsonA = JSON.stringify(a);
@@ -20,4 +20,4 @@ const isSameTree = (a: TreeNode | null, b: TreeNode | null): boolean => {
   return jsonA === jsonB;
 };
 
-console.log("isSameTree", isSameTree(a, x));
+// console.log("isSameTree", isSameTree(a, x));

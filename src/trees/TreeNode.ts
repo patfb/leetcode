@@ -1,9 +1,9 @@
 class TreeNode {
-  val: number | string;
+  val: number;
   left: TreeNode | null;
   right: TreeNode | null;
   constructor(
-    val?: number | string,
+    val?: number,
     left: TreeNode | null = null,
     right: TreeNode | null = null,
   ) {

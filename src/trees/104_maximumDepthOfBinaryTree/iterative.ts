@@ -1,19 +1,19 @@
 import { TreeNode } from "../TreeNode";
 
-const a = new TreeNode("a");
-const b = new TreeNode("b");
-const c = new TreeNode("c");
-const d = new TreeNode("d");
-const e = new TreeNode("e");
-const f = new TreeNode("f");
+// const a = new TreeNode("a");
+// const b = new TreeNode("b");
+// const c = new TreeNode("c");
+// const d = new TreeNode("d");
+// const e = new TreeNode("e");
+// const f = new TreeNode("f");
 
-a.left = b;
-a.right = c;
+// a.left = b;
+// a.right = c;
 
-b.left = d;
-b.right = e;
+// b.left = d;
+// b.right = e;
 
-c.right = f;
+// c.right = f;
 
 /* Given a tree that looks like this      
       a
@@ -42,4 +42,4 @@ const maxDepth = (node: TreeNode | null): number => {
   return maxDepth;
 };
 
-console.log("maxDepth", maxDepth(a));
+// console.log("maxDepth", maxDepth(a));

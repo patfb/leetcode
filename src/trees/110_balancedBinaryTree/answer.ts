@@ -4,20 +4,20 @@
 
 import { TreeNode } from "../TreeNode";
 
-const a = new TreeNode("a");
-const b = new TreeNode("b");
-const c = new TreeNode("c");
-const d = new TreeNode("d");
-const e = new TreeNode("e");
-const f = new TreeNode("f");
-const g = new TreeNode("g");
+// const a = new TreeNode("a");
+// const b = new TreeNode("b");
+// const c = new TreeNode("c");
+// const d = new TreeNode("d");
+// const e = new TreeNode("e");
+// const f = new TreeNode("f");
+// const g = new TreeNode("g");
 
-a.left = b;
-b.left = d;
-d.left = f;
-a.right = c;
-c.right = e;
-e.right = g;
+// a.left = b;
+// b.left = d;
+// d.left = f;
+// a.right = c;
+// c.right = e;
+// e.right = g;
 
 /* Given a tree that looks like this:
       a
@@ -73,4 +73,4 @@ const isBalanced = (root: TreeNode | null): boolean => {
   return allBalanced;
 };
 
-console.log("isBalanced", isBalanced(a));
+// console.log("isBalanced", isBalanced(a));
