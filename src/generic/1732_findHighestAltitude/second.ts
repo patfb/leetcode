@@ -7,13 +7,13 @@ Memory 44.06MB beats 22.22% of users with TypeScript
 const largestAltitude = (gains: number[]): number =>
   gains.reduce(
     (accum, current) => {
-      const total = accum.total;
+      const runningTotal = accum.runningTotal;
       const max = accum.max;
-      const currentHeight = current + total;
+      const currentHeight = current + runningTotal;
       const newMax = Math.max(max, currentHeight);
-      return { total: currentHeight, max: newMax };
+      return { runningTotal: currentHeight, max: newMax };
     },
-    { total: 0, max: 0 },
+    { runningTotal: 0, max: 0 },
   ).max;
 
 console.log("largestAltitude", largestAltitude([-5, 1, 5, 0, -7]));
