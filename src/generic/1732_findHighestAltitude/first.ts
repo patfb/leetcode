@@ -16,3 +16,5 @@ const largestAltitude = (gains: number[]): number => {
 };
 
 console.log("largestAltitude", largestAltitude([-5, 1, 5, 0, -7]));
+
+export {};
