@@ -1,13 +1,15 @@
 /* 
 https://leetcode.com/problems/find-the-town-judge/description/
-Runtime 157ms beats 5.55% of users with TypeScript
-Memory 56.95MB beats 20.83% of users with TypeScript
+Runtime 113ms beats 23.61% of users with TypeScript
+Memory 55.46MB beats 20.83% of users with TypeScript
 */
 
 const findJudge = (n: number, trust: number[][]): number => {
   if (n === 1 && !trust.length) return 1; // the only person in town is the judge
 
-  const nodes = Array.from(new Set(trust.flat()));
+  const nodes = Array(n)
+    .fill(0)
+    .map((_node, index) => index + 1);
 
   const createTrustGraph = (
     nodes: number[],
@@ -52,8 +54,6 @@ const findJudge = (n: number, trust: number[][]): number => {
 
   return judge === undefined ? -1 : judge;
 };
-
-export {};
 
 // console.log(
 //   "findJudge",
