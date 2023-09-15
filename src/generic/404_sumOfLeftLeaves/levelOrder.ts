@@ -1,3 +1,9 @@
+/* 
+https://leetcode.com/problems/sum-of-left-leaves/
+Runtime 57ms beats 75.61% of users with TypeScript 
+Memory 46.60MB beats 7.32% of users with TypeScript
+*/
+
 import { TreeNode } from "../../trees/TreeNode";
 
 const three = new TreeNode(3);
@@ -24,7 +30,9 @@ Given a tree that looks like this:
 */
 
 const sumOfLeftLeaves = (root: TreeNode | null): number => {
-  const levelOrderTraversal = (root: TreeNode | null) => {
+  const levelOrderTraversalLeftLeaves = (root: TreeNode | null) => {
+    const leftLeaves = [];
+
     if (!root) return [];
 
     const queue = [{ node: root, level: 0 }];
@@ -42,6 +50,13 @@ const sumOfLeftLeaves = (root: TreeNode | null): number => {
 
       if (current.node.left) {
         queue.push({ node: current.node.left, level: current.level + 1 });
+
+        if (
+          current.node.left.left === null &&
+          current.node.left.right === null
+        ) {
+          leftLeaves.push(current.node.left);
+        }
       }
 
       if (current.node.right) {
@@ -49,11 +64,11 @@ const sumOfLeftLeaves = (root: TreeNode | null): number => {
       }
     }
 
-    return levelMap;
+    return leftLeaves.map((node) => node.val);
   };
 
-  const binaryMapLevelOrder = levelOrderTraversal(root);
-  console.log("binaryMapLevelOrder", binaryMapLevelOrder);
+  const leftLeaves = levelOrderTraversalLeftLeaves(root);
+  return leftLeaves.reduce((sum, value) => (sum += value), 0);
 };
 
 console.log("sumOfLeftLeaves", sumOfLeftLeaves(root));
