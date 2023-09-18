@@ -46,6 +46,7 @@ const numIslands = (grid: string[][]): number => {
           grid[rowCheck][colCheck] === "1" &&
           !visited.has(`${rowCheck},${colCheck}`)
         ) {
+          console.log(`   found '${rowCheck},${colCheck}'`);
           stack.push([rowCheck, colCheck]);
           visited.add(`${rowCheck},${colCheck}`);
         }
@@ -56,7 +57,6 @@ const numIslands = (grid: string[][]): number => {
   for (let row = 0; row < rowLength; row++) {
     for (let column = 0; column < columnLength; column++) {
       if (grid[row][column] === "1" && !visited.has(`${row},${column}`)) {
-        console.log(`[${row},${column}] = ${grid[row][column]}`);
         dfs(row, column);
         islandCount++;
       }
