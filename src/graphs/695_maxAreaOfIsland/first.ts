@@ -1,16 +1,17 @@
 /* 
-https://leetcode.com/problems/number-of-islands
-Runtime 119ms beats 19.55% of users with TypeScript
-Memory 63.39MB beats 11.76% of users with TypeScript
-*/
+https://leetcode.com/problems/max-area-of-island
+Runtime 89ms beats 34.57%of users with TypeScript
+Memory 49.23MB beats 45.21% of users with TypeScript
 
-const numIslands = (grid: string[][]): number => {
+ */
+
+const maxAreaOfIsland = (grid: number[][]): number => {
   if (!grid.length) return 0; // empty grid has no islands
 
   const rowLength = grid.length;
   const columnLength = grid[0].length;
   const visited = new Set<string>();
-  let islandCount = 0;
+  let maxIslandArea = 0;
 
   const inBounds = ({
     row,
@@ -25,10 +26,11 @@ const numIslands = (grid: string[][]): number => {
   }) => row >= 0 && row < rowLength && column >= 0 && column < columnLength;
 
   const dfs = (row: number, column: number) => {
-    console.log(`   dfs(${row},${column})`);
+    // console.log(`   looking for more land connected to ${row},${column}`);
     const stack = [];
     visited.add(`${row},${column}`);
     stack.push([row, column]);
+    let islandArea = 1; // needs to start at 1 because we only start dfs on a tile that is already an island
 
     while (stack.length) {
       const [sRow, sColumn] = stack.pop();
@@ -49,35 +51,43 @@ const numIslands = (grid: string[][]): number => {
             rowLength,
             columnLength,
           }) &&
-          grid[rowCheck][colCheck] === "1" &&
+          grid[rowCheck][colCheck] === 1 &&
           !visited.has(`${rowCheck},${colCheck}`)
         ) {
-          console.log(`   found '${rowCheck},${colCheck}'`);
+          // console.log(`   adjacent land found at '${rowCheck},${colCheck}'`);
+          islandArea++;
           stack.push([rowCheck, colCheck]);
           visited.add(`${rowCheck},${colCheck}`);
         }
       }
     }
+
+    return islandArea;
   };
 
   for (let row = 0; row < rowLength; row++) {
     for (let column = 0; column < columnLength; column++) {
-      if (grid[row][column] === "1" && !visited.has(`${row},${column}`)) {
-        dfs(row, column);
-        islandCount++;
+      if (grid[row][column] === 1 && !visited.has(`${row},${column}`)) {
+        // console.log(`land found '${row},${column}'`);
+        const islandArea = dfs(row, column);
+        maxIslandArea = Math.max(maxIslandArea, islandArea);
       }
     }
   }
 
-  return islandCount;
+  return maxIslandArea;
 };
 
 console.log(
-  "numIslands",
-  numIslands([
-    ["1", "1", "0", "0", "0"],
-    ["1", "1", "0", "0", "0"],
-    ["0", "0", "1", "0", "0"],
-    ["0", "0", "0", "1", "1"],
+  "maxAreaOfIsland",
+  maxAreaOfIsland([
+    [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
+    [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
   ]),
 );
