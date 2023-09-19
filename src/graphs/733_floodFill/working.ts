@@ -1,6 +1,7 @@
 /* 
 https://leetcode.com/problems/flood-fill/description/
-
+Runtime 70ms beats 54.35% of users with TypeScript
+Memory 44.61MB beats 77.95% of users with TypeScript
 */
 
 const floodFill = (
