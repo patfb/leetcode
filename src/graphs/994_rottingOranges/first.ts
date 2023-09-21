@@ -37,81 +37,99 @@ const orangesRotting = (grid: number[][]): number => {
     coord.column <= maxCol;
 
   const directions = [
-    [-1, 0], // left
-    [1, 0], // right
     [0, 1], // up
     [0, -1], // down
+    [-1, 0], // left
+    [1, 0], // right
   ];
 
   // I still need to find all rotten oranges and start on a rotten orange
   // I need to figure out how to do breadth first with 2 starting points
   const breadthFirstFill = ({
-    coord,
+    initialRottenCoords,
     grid,
+    freshCount,
   }: {
-    coord: Coord;
+    initialRottenCoords: Coord[];
     grid: number[][];
+    freshCount: number;
   }) => {
     let steps = 0;
-    const queue = [coord];
+    let freshRemaining = freshCount;
+    const queue = [...initialRottenCoords];
 
-    while (queue.length) {
-      const current = queue.shift();
+    while (queue.length && freshCount) {
+      for (const _position of queue) {
+        const current = queue.shift();
 
-      // rot the current orange
-      grid[current.row][current.column] = Orange.rotten;
+        console.log(`steps:${steps}, current:${current} queue:${queue.length}
+        ${grid[0]}
+        ${grid[1]}
+        ${grid[2]}`);
 
-      console.log(`steps:${steps}, queue:${queue.length}
-      ${grid[0]}
-      ${grid[1]}
-      ${grid[2]}`);
+        for (const d of directions) {
+          const nextCoord = new Coord({
+            row: current.row + d[0],
+            column: current.column + d[1],
+          });
 
-      for (const d of directions) {
-        const nextCoord = new Coord({
-          row: current.row + d[0],
-          column: current.column + d[1],
-        });
+          if (
+            !inBounds({ coord: nextCoord, maxRow, maxCol }) ||
+            grid[nextCoord.row][nextCoord.column] !== Orange.fresh
+          ) {
+            continue;
+          }
 
-        if (
-          inBounds({ coord: nextCoord, maxRow, maxCol }) &&
-          grid[nextCoord.row][nextCoord.column] === Orange.fresh
-        ) {
-          steps++;
+          // rot the current orange
+          grid[current.row][current.column] = Orange.rotten;
           queue.push(nextCoord);
+          freshRemaining--;
         }
       }
+      steps++;
     }
 
     return steps;
   };
 
-  const findRottenIndices = (grid: number[][]): Coord[] => {
+  const parseGrid = (grid: number[][]) => {
     const rowLength = grid.length;
     const columnLength = grid[0].length;
 
     const rottenCoords: Coord[] = [];
+    let freshCount = 0;
 
     for (let row = 0; row < rowLength; row++) {
       for (let column = 0; column < columnLength; column++) {
         if (grid[row][column] === Orange.rotten) {
           rottenCoords.push(new Coord({ row, column }));
         }
+        if (grid[row][column] === Orange.fresh) {
+          freshCount++;
+        }
       }
     }
 
-    return rottenCoords;
+    return {
+      rottenCoords,
+      rottenCount: rottenCoords.length,
+      freshCount,
+    };
   };
 
-  const rotten = findRottenIndices(grid);
-  const nRotten = rotten.length;
+  const { rottenCoords, rottenCount, freshCount } = parseGrid(grid);
 
-  console.log("rotten", rotten);
-  console.log("nRotten", nRotten);
+  console.log("rottenCoords", rottenCoords);
+  console.log("rottenCount", rottenCount);
+  console.log("nFreshOranges", freshCount);
 
   const result = breadthFirstFill({
-    coord: new Coord({ row: 0, column: 0 }),
+    initialRottenCoords: rottenCoords,
     grid,
+    freshCount,
   });
+
+  console.log("result", result);
 };
 
 console.log(
