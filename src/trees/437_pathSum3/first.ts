@@ -31,31 +31,38 @@ two.right = one;
 const root = ten;
 
 const pathSum = (root: TreeNode | null, targetSum: number): number => {
+  interface PathItem {
+    val: number;
+    id: number;
+  }
+
   interface StackItem {
     node: TreeNode | null;
     sum: number;
-    path: number[];
+    path: PathItem[];
   }
 
   if (!root) return 0;
 
+  let id = 0;
   const dfsPaths = (root: TreeNode) => {
-    const downwardPaths = [];
+    const downwardPaths: PathItem[][] = [];
     const stack: StackItem[] = [{ node: root, sum: 0, path: [] }];
 
     while (stack.length) {
+      id++;
       const current = stack.pop();
       const updatedSum = current.sum + current.node.val;
 
       if (!current.node.left && !current.node.right) {
-        downwardPaths.push([...current.path, current.node.val]);
+        downwardPaths.push([...current.path, { val: current.node.val, id }]);
       }
 
       if (current.node.right) {
         stack.push({
           node: current.node.right,
           sum: updatedSum,
-          path: [...current.path, current.node.val],
+          path: [...current.path, { val: current.node.val, id }],
         });
       }
 
@@ -63,7 +70,7 @@ const pathSum = (root: TreeNode | null, targetSum: number): number => {
         stack.push({
           node: current.node.left,
           sum: updatedSum,
-          path: [...current.path, current.node.val],
+          path: [...current.path, { val: current.node.val, id }],
         });
       }
     }
@@ -71,24 +78,23 @@ const pathSum = (root: TreeNode | null, targetSum: number): number => {
     return downwardPaths;
   };
 
-  const adjacentSum = (path: number[], targetSum: number) => {
-    let totalPathSums = 0;
+  const adjacentSum = (path: PathItem[], targetSum: number) => {
+    const validPaths = [];
     let leftPointer = 0;
     let rightPointer = 0;
 
     while (leftPointer < path.length && rightPointer < path.length) {
       const subset = path.slice(leftPointer, rightPointer + 1); // need to do +1 because slice end is exclusive
-      const sum = subset.reduce((accum, current) => accum + current, 0);
-
-      console.log(
-        `left:${leftPointer}, right:${rightPointer}, sum:${sum}, subset:${subset}`,
-      );
+      const sum = subset.reduce((accum, current) => accum + current.val, 0);
+      const subsetId = subset
+        .reduce((accum, current) => [...accum, current.id], [])
+        .join("_");
 
       if (sum === targetSum) {
-        totalPathSums++;
+        validPaths.push(subsetId);
+
         leftPointer++;
         rightPointer = leftPointer;
-        console.log("found one", { totalPathSums, subset, path });
       }
 
       if (sum < targetSum) {
@@ -101,21 +107,20 @@ const pathSum = (root: TreeNode | null, targetSum: number): number => {
       }
     }
 
-    return totalPathSums;
+    return validPaths;
   };
-
-  let pathsWithValidSum = 0;
 
   const paths = dfsPaths(root);
 
-  console.log("all paths are", paths);
-
-  paths.forEach((path) => {
-    const nPaths = adjacentSum(path, targetSum);
-    pathsWithValidSum += nPaths;
-  });
-
-  console.log("pathsWithValidSum", pathsWithValidSum);
+  const validPaths = paths.flatMap((path) => adjacentSum(path, targetSum));
+  const uniquePaths = new Set(validPaths);
+  return uniquePaths.size;
 };
 
 console.log("pathSum", pathSum(root, 8));
+
+// const exampleSet = new Set<string>();
+// exampleSet.add("2_3");
+// exampleSet.add("2_3");
+// console.log("size", exampleSet.size);
+// console.log(exampleSet);
