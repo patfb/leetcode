@@ -5,7 +5,7 @@ https://leetcode.com/problems/path-sum-iii/?envType=study-plan-v2&envId=leetcode
 
 import { TreeNode } from "../TreeNode";
 
-const ten = new TreeNode(10);
+/* const ten = new TreeNode(10);
 const five = new TreeNode(5);
 const negativeThree = new TreeNode(-3);
 const eleven = new TreeNode(11);
@@ -28,7 +28,21 @@ threeA.right = negativeTwo;
 
 two.right = one;
 
-const root = ten;
+const root = ten; */
+
+/* const negativeTwo = new TreeNode(-2);
+const negativeThree = new TreeNode(-3);
+
+negativeTwo.right = negativeThree;
+
+const root = negativeTwo; */
+
+const one = new TreeNode(1);
+const two = new TreeNode(2);
+
+one.left = two;
+
+const root = one;
 
 const pathSum = (root: TreeNode | null, targetSum: number): number => {
   interface PathItem {
@@ -82,42 +96,30 @@ const pathSum = (root: TreeNode | null, targetSum: number): number => {
     const validPaths = [];
     let leftPointer = 0;
     let rightPointer = 0;
+    let runningSum = 0;
 
-    while (leftPointer < path.length && rightPointer < path.length) {
-      const subset = path.slice(leftPointer, rightPointer + 1); // need to do +1 because slice end is exclusive
-      const sum = subset.reduce((accum, current) => accum + current.val, 0);
-      const subsetId = subset
-        .reduce((accum, current) => [...accum, current.id], [])
-        .join("_");
+    const prefixSum = (subset: PathItem[]) => {
+      const subsetId = subset.map(({ id }) => id).join("_");
+    };
 
-      if (sum === targetSum) {
-        validPaths.push(subsetId);
+    const subset = path.slice(leftPointer, rightPointer + 1);
+    const subsetId = subset.map(({ id }) => id).join("_");
+    const sum = subset.reduce((accum, current) => accum + current.val, 0);
 
-        leftPointer++;
-        rightPointer = leftPointer;
-      }
-
-      if (sum < targetSum) {
-        rightPointer++;
-      }
-
-      if (sum > targetSum) {
-        leftPointer++;
-        rightPointer = leftPointer;
-      }
-    }
+    for (let index = 0; index < path.length; index++) {}
 
     return validPaths;
   };
 
   const paths = dfsPaths(root);
-
+  console.log("paths", paths);
   const validPaths = paths.flatMap((path) => adjacentSum(path, targetSum));
+  console.log("validPaths", validPaths);
   const uniquePaths = new Set(validPaths);
   return uniquePaths.size;
 };
 
-console.log("pathSum", pathSum(root, 8));
+console.log("pathSum", pathSum(root, 0));
 
 // const exampleSet = new Set<string>();
 // exampleSet.add("2_3");
