@@ -83,3 +83,5 @@ const diameterOfBinaryTree = (root: TreeNode | null): number => {
 };
 
 console.log("diameterOfBinaryTree", diameterOfBinaryTree(root));
+
+export {};
