@@ -17,7 +17,6 @@ four.right = five;
 pre-order traversal: self, left, right
 post-order traversal: left, right, self
 in-order traversal: left, self, right
-
 */
 
 const goodNodes = (root: TreeNode | null): number => {
