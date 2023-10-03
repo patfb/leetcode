@@ -1,3 +1,9 @@
+/* 
+https://leetcode.com/problems/linked-list-cycle/description/
+Runtime 62ms beats 86.56% of users with Typescript 
+Memory 47.2 MB beats 6.36% of user with Typescript
+*/
+
 import { ListNode } from "../ListNode";
 
 const three = new ListNode(3);
