@@ -1,3 +1,6 @@
+// Runtime 55ms Beats 64.35% of users with JavaScript
+// 52.36 MB Beats 30.50% of users with JavaScript
+
 /**
  * @param {number[]} nums
  * @param {number} target
