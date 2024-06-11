@@ -1,22 +1,38 @@
-// /**
-//  * @param {string} s
-//  * @return {boolean}
-//  */
-// const isValid = (s) => {
-//   const map = new Map();
+// 55ms Beats 70.57% of users with JavaScript
+// 49.36MB Beats 91.35% of users with JavaScript
 
-//   map.set(")", "(");
-//   map.set("]", "[");
-//   map.set("}", "{");
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+const isValid = (s) => {
+  const sArray = s.split("");
+  const stack = [];
+  const symbolPairs = new Map();
+  symbolPairs.set(")", "(");
+  symbolPairs.set("]", "[");
+  symbolPairs.set("}", "{");
 
-//   const sArray = s.split("");
-//   const stack = [];
+  // odd length array can't have matching symbols so short circuit
+  if (sArray.length % 2 !== 0) return false;
 
-//   while (sArray.length) {
-//     stack.push(sArray.shift());
-//   }
+  // if the first symbol isn't an opening symbol then short circuit
+  const first = sArray.at(0);
+  if (first === ")" || first === "]" || first === "}") return false;
 
-//   console.log("stack", stack);
-// };
+  const valid = sArray.every((symbol) => {
+    if (!symbolPairs.has(symbol)) {
+      stack.push(symbol);
+      return true;
+    }
 
-// export { isValid };
+    if (stack.length && stack.at(-1) === symbolPairs.get(symbol)) {
+      stack.pop();
+      return true;
+    }
+  });
+
+  return valid && stack.length === 0;
+};
+
+export { isValid };
