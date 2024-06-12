@@ -1,10 +1,11 @@
+// 138 ms Beats 9.99% of users with JavaScript
+// 58.35 MB Beats 6.37% of users with JavaScript
+
 /**
  * @param {string} s
  * @return {number}
  */
 const romanToInt = (s) => {
-  console.log("##############################");
-
   const roman = new Map();
 
   // thousands
@@ -46,33 +47,34 @@ const romanToInt = (s) => {
   roman.set("IX", 9);
 
   const allInts = [];
-  const currentInt = [];
+  let currentInt = null;
 
   let leftPointer = 0;
-  let rightPointer = 0;
+  let rightPointer = 1;
 
   const sArray = s.split("");
 
-  while (leftPointer < sArray.length && rightPointer <= sArray.length) {
+  while (leftPointer < sArray.length && rightPointer <= sArray.length + 1) {
     const symbol = sArray.slice(leftPointer, rightPointer).join("");
 
-    console.log({ leftPointer, rightPointer, symbol });
-
     if (roman.has(symbol)) {
+      const symbolValue = roman.get(symbol);
       // replace the last biggest symbol with this new symbol e.g. II -> III
-      currentInt.pop();
-      currentInt.push(roman.get(symbol));
-      console.log("--- currentInt", currentInt);
+      currentInt = symbolValue;
     } else {
-      const current = currentInt.pop();
-      allInts.push(current);
-      leftPointer = rightPointer;
+      allInts.push(currentInt);
+      currentInt = null;
+      leftPointer = rightPointer - 1;
+      rightPointer--;
     }
 
     rightPointer++;
   }
 
-  console.log("allInts", allInts);
+  const allNumbers = currentInt ? [...allInts, currentInt] : allInts;
+  const sum = allNumbers.reduce((accum, current) => accum + current, 0);
+
+  return sum;
 };
 
 export { romanToInt };
