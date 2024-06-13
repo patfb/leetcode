@@ -8,6 +8,8 @@
     "build": "tsc",
     "clean": "rimraf dist",
     "dev": "nodemon",
+    "prettier:check": "prettier . --check",
+    "prettier:write": "prettier . --write",
     "test:watch": "jest --watch",
     "test": "jest"
   },
