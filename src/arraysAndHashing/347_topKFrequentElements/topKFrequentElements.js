@@ -1,5 +1,5 @@
-// Runtime 57 ms Beats 92.79% of users with JavaScript
-// 52.44 MB Beats 82.92% of users with JavaScript
+// 54 ms Beats 96.29%
+// 52.06 MB Beats 88.95%
 
 /**
  * @param {number[]} nums
@@ -18,7 +18,7 @@ const topKFrequent = (nums, k) => {
     }
   });
 
-  const freqArray = Array.from(freqMap, ([value, key]) => ({ key, value }));
+  const freqArray = Array.from(freqMap, ([key, value]) => ({ key, value }));
 
   const sorted = freqArray.sort((a, b) => {
     if (a.value > b.value) return -1;
