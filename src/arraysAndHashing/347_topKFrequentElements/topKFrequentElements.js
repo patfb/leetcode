@@ -7,7 +7,6 @@
  * @return {number[]}
  */
 const topKFrequent = (nums, k) => {
-  let freqArray = [];
   const freqMap = new Map();
 
   nums.forEach((num) => {
@@ -19,9 +18,7 @@ const topKFrequent = (nums, k) => {
     }
   });
 
-  freqMap.forEach((value, key) => {
-    freqArray.push({ key, value });
-  });
+  const freqArray = Array.from(freqMap, ([value, key]) => ({ key, value }));
 
   const sorted = freqArray.sort((a, b) => {
     if (a.value > b.value) return -1;
